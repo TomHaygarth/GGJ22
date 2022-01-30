@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 2036427664397468143, guid: c16791284283e42ccaf515e74dfc83c0,
+        type: 3}
+      propertyPath: m_jumpSfxBank
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5850609006236907025, guid: c16791284283e42ccaf515e74dfc83c0,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -97,5 +102,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1859568166386321293, guid: c16791284283e42ccaf515e74dfc83c0, type: 3}
+    - {fileID: 4081076026411118205, guid: c16791284283e42ccaf515e74dfc83c0, type: 3}
+    - {fileID: 9093052409276973891, guid: c16791284283e42ccaf515e74dfc83c0, type: 3}
+    - {fileID: 5330968286145974532, guid: c16791284283e42ccaf515e74dfc83c0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c16791284283e42ccaf515e74dfc83c0, type: 3}

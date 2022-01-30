@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
 
     private float m_currentJumpCooldown = 0.0f;
 
+    [SerializeField]
+    private AudioBankPlayer m_jumpSfxBank = null;
+
     private bool m_isJumping = false;
     private bool m_playJumpSfx = false;
     private bool m_playLandSfx = false;
@@ -40,7 +43,10 @@ public class PlayerController : MonoBehaviour
     {
         if (m_playJumpSfx)
         {
-            // play
+            if (m_jumpSfxBank != null)
+            {
+                m_jumpSfxBank.PlayRand();
+            }
             m_playJumpSfx = false;
         }
     }
