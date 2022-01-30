@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Phys2D
 {
@@ -9,6 +10,7 @@ namespace Phys2D
         public Vector2Int centre;
     }
 
+    [Serializable]
     public struct CircleBound
     {
         public Vector2Int centre;
