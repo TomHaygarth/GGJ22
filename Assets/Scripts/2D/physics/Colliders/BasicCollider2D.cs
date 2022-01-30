@@ -65,6 +65,8 @@ namespace Phys2D
 
             mBoundingBox.max = new Vector2Int(Mathf.RoundToInt(mMaxExtent.x * MathUtils.Constants.unitScale),
                                               Mathf.RoundToInt(mMaxExtent.y * MathUtils.Constants.unitScale));
+
+            MarkDirty();
         }
 
         protected void Start()

@@ -44,13 +44,13 @@ namespace Phys2D
             // Go through all rigidbodies and update their position
             foreach (var body in mRigidBodies)
             {
-                Vector2Int delta_grav = new Vector2Int(Mathf.RoundToInt(body.Gravity.x / Time.fixedDeltaTime),
-                                                       Mathf.RoundToInt(body.Gravity.y / Time.fixedDeltaTime));
+                Vector2Int delta_grav = new Vector2Int(Mathf.RoundToInt(body.Gravity.x * Time.fixedDeltaTime),
+                                                       Mathf.RoundToInt(body.Gravity.y * Time.fixedDeltaTime));
 
                 body.Velocity += delta_grav;
 
-                Vector2Int delta_v = new Vector2Int(Mathf.RoundToInt(body.Velocity.x / Time.fixedDeltaTime),
-                                                    Mathf.RoundToInt(body.Velocity.y / Time.fixedDeltaTime));
+                Vector2Int delta_v = new Vector2Int(Mathf.RoundToInt(body.Velocity.x * Time.fixedDeltaTime),
+                                                    Mathf.RoundToInt(body.Velocity.y * Time.fixedDeltaTime));
 
                 // Update position of the body
                 Vector3 pos = body.UnityTransform.position;
@@ -124,13 +124,21 @@ namespace Phys2D
 
         public bool CheckCollision(Phys2D.AABB box1, Phys2D.AABB box2)
         {
-            if (box1.max.x < box2.min.x || box1.min.x > box2.max.x ||
-                box1.max.y < box2.min.y || box1.min.y > box2.max.y)
+            Vector2Int aMin = box1.min + box1.centre;
+            Vector2Int aMax = box1.max + box1.centre;
+
+            Vector2Int bMin = box2.min + box2.centre;
+            Vector2Int bMax = box2.max + box2.centre;
+
+            if (aMax.x >= bMin.x &&
+                aMax.y >= bMin.y &&
+                aMin.x <= bMax.x &&
+                aMin.y <= bMax.y)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public bool CheckCollision(CircleBound circle1, CircleBound circle2)
@@ -138,7 +146,7 @@ namespace Phys2D
             int r_sqr = (circle1.radius + circle2.radius) ^ 2;
             int x_sqr = (circle1.centre.x + circle2.centre.x) ^ 2;
             int y_sqr = (circle1.centre.y + circle2.centre.y) ^ 2;
-            return r_sqr < x_sqr + y_sqr;
+            return r_sqr > x_sqr + y_sqr;
         }
 
         public Collision2D CalculateCollision(Phys2D.AABB box1, Phys2D.AABB box2)
