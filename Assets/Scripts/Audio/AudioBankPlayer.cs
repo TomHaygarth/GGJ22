@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AudioBankPlayer : MonoBehaviour
 {
+    public static float m_volume = 1.0f;
+
     [SerializeField]
     private AudioSource m_audioSource = null;
 
@@ -29,6 +31,13 @@ public class AudioBankPlayer : MonoBehaviour
 
             m_audioSource.clip = m_audioClips[idx];
             m_audioSource.Play();
+
+            m_audioSource.volume = m_volume;
         }
+    }
+
+    public void SetVolume(float volume)
+    {
+        m_volume = volume;
     }
 }

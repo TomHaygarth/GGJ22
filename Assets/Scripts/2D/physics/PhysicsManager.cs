@@ -90,23 +90,23 @@ namespace Phys2D
                     // after collision we need to resolve the position of the rigidbody
                     if (collision2d.normal == Vector2Int.up)
                     {
-                        int extent = body_pos2d.y - (body.BoundingBox.min.y + body_pos2d.y);
-                        body_pos2d.y = collision2d.contactPoint.y + extent;
+                        body_pos2d.y = collision2d.contactPoint.y - body.BoundingBox.min.y;
+                        body.Velocity.Set(body.Velocity.x, 0);
                     }
                     else if (collision2d.normal == Vector2Int.right)
                     {
-                        int extent = body_pos2d.x - (body.BoundingBox.max.x + body_pos2d.x);
-                        body_pos2d.x = collision2d.contactPoint.x + extent;
+                        body_pos2d.x = collision2d.contactPoint.x - body.BoundingBox.min.x;
+                        body.Velocity.Set(0, body.Velocity.y);
                     }
                     else if (collision2d.normal == Vector2Int.down)
                     {
-                        int extent = body_pos2d.y - (body.BoundingBox.max.y + body_pos2d.y);
-                        body_pos2d.y = collision2d.contactPoint.y + extent;
+                        body_pos2d.y = collision2d.contactPoint.y - body.BoundingBox.max.y;
+                        body.Velocity.Set(body.Velocity.x, 0);
                     }
                     else
                     {
-                        int extent = body_pos2d.x - (body.BoundingBox.min.x + body_pos2d.x);
-                        body_pos2d.x = collision2d.contactPoint.x + extent;
+                        body_pos2d.x = collision2d.contactPoint.x - body.BoundingBox.max.x;
+                        body.Velocity.Set(0, body.Velocity.y);
                     }
                 }
                 body.LastCollidedWith = lastCollidedWith;
@@ -175,7 +175,7 @@ namespace Phys2D
             int closestMatch = -1;
             for (int i = 0; i < 4; i++)
             {
-                int dot = MathUtils.Vec2Int.Dot(delta/MathUtils.Constants.unitScale, compass[i]);
+                int dot = MathUtils.Vec2Int.Dot(delta, compass[i]);
                 if (dot > max_dot)
                 {
                     max_dot = dot;
